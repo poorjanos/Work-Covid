@@ -115,7 +115,18 @@ plot(lak_ts_comp)
 lak_ts_stl <-  stl(lak_ts, s.window = 'periodic')
 plot(lak_ts_stl)
 
-as.data.frame(lak_ts_stl$time.series[,2])
+
+
+# Check log trends -> does not make much sense due to small changes
+lak_trend <- cbind(lak[1], as.data.frame(as.vector(lak_ts_stl$time.series[,2])))
+names(lak_trend) <- c('IDOSZAK', 'TREND')
+
+ggplot(lak_trend, aes(x = IDOSZAK)) +
+  geom_line(aes(y = log(TREND)))
+
+
+ggplot(lak_trend, aes(x = IDOSZAK)) +
+  geom_line(aes(y = TREND)) 
 
 #########################################################################################
 # Smoothing #############################################################################

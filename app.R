@@ -47,7 +47,7 @@ server <- function(input, output) {
   
   output$results <- renderTable({
     filtered()
-  })
+  }, digits = 4)
 }
 
 shinyApp(ui, server)
